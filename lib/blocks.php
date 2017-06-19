@@ -124,8 +124,13 @@ function do_blocks( $content ) {
 			$block_attributes_string = $matches['attributes'][ $index ][0];
 			$block_attributes = parse_block_attributes( $block_attributes_string );
 
+			$content = null;
+			if ( isset( $matches['content'][ $index ][0] ) ) {
+				$content = $matches['content'][ $index ][0];
+			}
+
 			// Call the block's render function to generate the dynamic output.
-			$output = call_user_func( $wp_registered_blocks[ $block_name ]['render'], $block_attributes );
+			$output = call_user_func( $wp_registered_blocks[ $block_name ]['render'], $block_attributes, $content );
 		} elseif ( isset( $matches['content'][ $index ][0] ) ) {
 			$output = $matches['content'][ $index ][0];
 		}
