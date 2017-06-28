@@ -46,6 +46,17 @@ const editMediaLibrary = ( attributes, setAttributes ) => {
 	editFrame.open( 'gutenberg-gallery' );
 };
 
+// the media library image object contains numerous attributes
+// we only need this set to display the image in the library
+const slimImageObjects = ( imgs ) => {
+	const attrSet = [ 'sizes', 'mime', 'type', 'subtype', 'id', 'url', 'alt' ];
+	const newImgs = [];
+	imgs.forEach( ( img ) => {
+		newImgs.push( _.pick( img, attrSet ) );
+	} );
+	return newImgs;
+};
+
 function defaultColumnsNumber( attributes ) {
 	attributes.images = attributes.images || [];
 	return Math.min( 3, attributes.images.length );
@@ -55,14 +66,6 @@ registerBlockType( 'core/gallery', {
 	title: __( 'Gallery' ),
 	icon: 'format-gallery',
 	category: 'common',
-
-	attributes: {
-		images:
-			query( 'div.wp-block-gallery figure.blocks-gallery-image img', {
-				url: attr( 'src' ),
-				alt: attr( 'alt' ),
-			} ) || [],
-	},
 
 	getEditWrapperProps( attributes ) {
 		const { align } = attributes;
@@ -96,7 +99,7 @@ registerBlockType( 'core/gallery', {
 		);
 
 		if ( images.length === 0 ) {
-			const setMediaUrl = ( imgs ) => setAttributes( { images: imgs } );
+			const setMediaUrl = ( imgs ) => setAttributes( { images: slimImageObjects( imgs ) } );
 			return [
 				controls,
 				<Placeholder
