@@ -8,15 +8,13 @@ import { Toolbar, Placeholder } from 'components';
  * Internal dependencies
  */
 import './style.scss';
-import { registerBlockType, query as hpq } from '../../api';
+import { registerBlockType } from '../../api';
 import MediaUploadButton from '../../media-upload-button';
 import InspectorControls from '../../inspector-controls';
 import RangeControl from '../../inspector-controls/range-control';
 import BlockControls from '../../block-controls';
 import BlockAlignmentToolbar from '../../block-alignment-toolbar';
 import GalleryImage from './gallery-image';
-
-const { query, attr } = hpq;
 
 const MAX_COLUMNS = 8;
 
