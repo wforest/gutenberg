@@ -273,22 +273,13 @@ class InserterMenu extends Component {
 						<div className="editor-inserter__recent">
 							{ getCategories()
 								.map( ( category ) => category.slug === 'common' && !! visibleBlocksByCategory[ category.slug ] && (
-									<div key={ category.slug }>
-										<div
-											className="editor-inserter__separator"
-											id={ `editor-inserter__separator-${ category.slug }-${ instanceId }` }
-											aria-hidden="true"
-										>
-											{ category.title }
-										</div>
-										<div
-											className="editor-inserter__category-blocks"
-											role="menu"
-											tabIndex="0"
-											aria-labelledby={ `editor-inserter__separator-${ category.slug }-${ instanceId }` }
-										>
-											{ visibleBlocksByCategory[ category.slug ].map( ( block ) => this.getBlockItem( block ) ) }
-										</div>
+									<div
+										className="editor-inserter__category-blocks"
+										role="menu"
+										tabIndex="0"
+										aria-labelledby={ `editor-inserter__separator-${ category.slug }-${ instanceId }` }
+									>
+										{ visibleBlocksByCategory[ category.slug ].map( ( block ) => this.getBlockItem( block ) ) }
 									</div>
 								) )
 							}
